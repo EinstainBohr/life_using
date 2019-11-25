@@ -1,7 +1,6 @@
 #include <iostream>
 #include "AL/alut.h"
 #include "AL/al.h"
-#include "AL/alut.h"
 #include "AL/alc.h"
 #include <stdlib.h>
 #include <stdio.h>
