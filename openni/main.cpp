@@ -6,9 +6,9 @@ using namespace std;
 
 int main(){
 
-    VideoCapture capture(VideoCaptureAPIs::CAP_OPENNI+0); // or CAP_OPENNI
+    VideoCapture capture(CAP_OPENNI2); // or CAP_OPENNI
     Mat depth;
-    Mat bgrImage;
+    Mat Image;
     viz::Viz3d window("window");
     //显示坐标系
     window.showWidget("Coordinate", viz::WCoordinateSystem());
@@ -18,7 +18,7 @@ int main(){
         capture.grab();
         //capture.retrieve( depthMap, CAP_OPENNI_POINT_CLOUD_MAP);
         capture.retrieve( depth, CAP_OPENNI_DISPARITY_MAP);
-        capture.retrieve( bgrImage, CAP_OPENNI_BGR_IMAGE);
+        capture.retrieve( Image, CAP_OPENNI_BGR_IMAGE);
 
 
         int height=depth.rows;
@@ -36,8 +36,9 @@ int main(){
             }
         cv::viz::WCloud cloud(point_cloud);
         window.showWidget("cloud",cloud);
+        resize(Image,Image,Size(Image.cols*0.5,Image.rows*0.5));
         imshow("dep",depth);
-        imshow("rgb",bgrImage);
+        imshow("rgb",Image);
         waitKey( 3 );
         window.spinOnce(1, true);
     }
